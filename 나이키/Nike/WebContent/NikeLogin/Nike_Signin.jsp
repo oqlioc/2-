@@ -372,14 +372,38 @@ cre('send','Pageview');
 			</ul>
 			<ul class="uk-float-right header-mymenu">
 				<li>
-					
-					<span class="log_user"><i class="ns-profile"></i><a data-uk-toggle="{target:'#account-box'}" class="user_name">김홍일</a></span>
-					<div class="account-box uk-hidden" id="account-box">
-						<a title="마이페이지" data-click-area="Upper GNB" data-click-name="Logged_My page" href="/kr/ko_kr/mypage">마이페이지</a>
-						<a title="회원정보관리" data-click-area="Upper GNB" data-click-name="Logged_Account Setting" href="/kr/ko_kr/account">회원정보관리</a>
-						<a title="위시리스트" data-click-area="Upper GNB" data-click-name="Logged_Wish list" href="/kr/ko_kr/account/wishlist">위시리스트</a>
-						<a title="로그아웃" data-click-area="Upper GNB" data-click-name="Logged_Log out" href="/kr/ko_kr/logout">로그아웃</a>
-					</div>
+					<%
+							String id = (String) session.getAttribute("idSession");
+							System.out.println(id + " 입장");
+
+							if (id == null) {
+								System.out.println("세션값 없음");
+						%>
+								<span>
+									<a title="회원가입" data-click-area="Upper GNB"
+										data-click-name="join" class="join" href="./Nike_SignupForm.ni">회원가입</a>
+		
+									/
+									<a title="로그인" data-click-area="Upper GNB"
+										data-click-name="login" class="login" href="./Nike_SigninForm.ni">로그인</a>
+								</span>
+						<%
+							} else {
+								System.out.println("세션값 있음");
+						%>
+								<a title="로그아웃" data-click-area="Upper GNB" data-click-name="Logged_Log out" href="./Nike_Logout.ni">로그아웃</a>
+						<%
+							if (id.equals("admin")) {
+						
+								System.out.println("안녕하세요 관리자님");
+						
+								} else {
+						%>
+						 			안녕하세요.
+						<%
+								}
+							}
+						%>
 				</li>
 
 				<li>
@@ -1528,41 +1552,73 @@ cre('send','Pageview');
 	
 
 	
-	<section class="wrapper">
-		<section class="content-area">					
-			<!-- 로그인 -->
-		<div class="uk-width-1-1 uk-margin-xlarge-top">
-			<div class="login-wrap width-small">
-				<form method="post" action="./Nike_Signin.ni">
-					<table border="1">
-						<tr>
-							<h3>
-								<td colspan="2">로그인 페이지</td>
-							</h3>
-						</tr>
-						<tr>
-							<td>아이디 :</td>
-							<td><input type="text" name="emailAddress" id="emailAddress"></td>
-						</tr>
-						<tr>
-							<td>비밀번호 :</td>
-							<td><input type="password" name="password" id="password"></td>
-						</tr>
-						<tr>
-							<td colspan="2"><input type="submit" value="로그인">
-								<a href="./Nike_SignupForm.ni">회원가입</a>
-							</td>
-						</tr>
-					</table>
-				</form>	
-			</div>
-		</div>
 	
-		</section>
-		
-		
-	</section>
 
+
+   <section class="wrapper">
+      <section class="content-area">
+         <!-- 로그인 -->
+         <div class="uk-width-1-1 uk-margin-xlarge-top">
+            <div class="login-wrap width-small">
+               <div class="header uk-text-center">
+                  <form method="post" action="./Nike_Signin.ni">
+
+                     <h2 class="title">로그인 페이지</h2>
+                     <br> <br>
+
+
+                     <div class="body">
+                        <div data-module-dynamicform="{isAjax:false,errMsg:로그인 실패 입니다.}">
+
+                           <div class="uk-grid">
+                              <div class="uk-width-1-1 dynamic-form-register">
+
+                                 <div class="uk-form-row">
+
+                                    <label class="uk-form-label"></label>
+                                    <div class="input-textfield width-max  "
+                                       data-component-textfield="">
+                                       <label for="firstName">아이디를 입력해 주세요.</label> <input
+                                          type="text" name="emailAddress" id="emailAddress" />
+
+                                    </div>
+
+
+
+                                    <div class="uk-form-row">
+                                       <label class="uk-form-label"></label>
+                                       <div class="input-textfield width-max  "
+                                          data-component-textfield="">
+                                          <label for="confirmPassword">패스워드를 입력해 주세요.</label> <input
+                                             type="password" name="password" id="password" />
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <br>
+
+                     <button class="button xlarge width-max" type="submit">로그인</button>
+                  </form>
+                  <br>
+
+                  <button class="button xlarge width-max"
+                     onclick="location.href='./Nike_SignupForm.ni'">회원가입</button>
+
+               </div>
+            </div>
+         </div>
+
+      </section>
+
+
+   </section>
+
+
+   </section>
 
 	<div class="mobile-menu_wrap uk-offcanvas con_menu" id="mobile-menu" data-module-mobilegnb="">
 	<div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
